@@ -95,7 +95,13 @@
         </button>
     </div>
     <div class="fixed top-20 right-4 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg z-50" x-show="showSuccessToast" x-transition @click.away="showSuccessToast = false">🎉 Added to your cart!</div>
-    <div x-show="isCartOpen" @click.away="isCartOpen = false" class="fixed inset-0 bg-black bg-opacity-50 z-50" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"><div class="fixed top-0 right-0 h-full w-full max-w-sm bg-white shadow-xl flex flex-col" @click.stop x-show="isCartOpen" x-transition:enter="transition ease-in-out duration-300 transform" x-transition:enter-start="translate-x-full" x-transition:enter-end="translate-x-0" x-transition:leave="transition ease-in-out duration-300 transform" x-transition:leave-start="translate-x-0" x-transition:leave-end="translate-x-full"><div class="flex-grow flex flex-col"><div class="flex justify-between items-center p-4 border-b"><h3 class="text-lg font-semibold">Your Cart</h3><button @click="isCartOpen = false" class="text-sm text-indigo-600 hover:underline">← Continue Shopping</button></div><div class="flex-grow overflow-y-auto p-4"><template x-if="cart.length === 0"><div class="text-center pt-10"><p class="text-gray-500 mb-4">Your cart is empty.</p><button @click="selectedProductId = '1'; isCartOpen = false" class="text-indigo-600 font-semibold hover:underline">Shop Bestseller →</button></div></template><div x-show="cartMessage" x-text="cartMessage" class="bg-indigo-50 text-indigo-800 text-sm font-semibold p-3 rounded-lg mb-4 text-center"></div><ul class="divide-y"><template x-for="item in cart" :key="item.id"><li class="flex py-4 space-x-4"><img :src="item.image" class="w-20 h-20 object-cover rounded-md"><div class="flex-1"><h4 class="font-semibold" x-text="item.name"></h4><p class="text-sm text-gray-500" x-text="item.type === 'subscribe' ? `Subscription` : 'One-time Purchase'"></p><p class="text-sm font-semibold" x-text="`$${item.price.toFixed(2)}`"></p><p x-show="item.type === 'subscribe'" class="text-xs text-green-600 font-semibold">Saving 15%</p><div class="mt-2 flex items-center justify-between"><div class="flex items-center border rounded"><button @click="updateQuantity(item.id, item.quantity - 1)" class="px-2 py-1">-</button><span class="px-3" x-text="item.quantity"></span><button @click="updateQuantity(item.id, item.quantity + 1)" class="px-2 py-1">+</button></div><button @click="removeFromCart(item.id)" class="text-xs text-red-500 hover:underline">Remove</button></div></div></li></template></ul><div x-show="cartRecommendation" class="mt-6 pt-6 border-t"><div class="p-3 rounded-lg bg-gradient-to-r from-gray-50 to-indigo-50"><h4 class="font-semibold text-center text-gray-800 mb-2" x-text="cartRecommendation.title"></h4><div class="flex items-center space-x-3"><img :src="cartRecommendation.image" class="w-16 h-16 object-cover rounded-md"><div class="flex-1"><p class="text-sm font-semibold" x-text="cartRecommendation.name"></p><p class="text-xs text-gray-600" x-text="cartRecommendation.reason"></p></div><button @click="handleRecommendationClick(cartRecommendation)" class="bg-indigo-600 text-white font-bold text-xs py-2 px-3 rounded-full hover:bg-indigo-700 transition" x-text="cartRecommendation.cta"></button></div></div></div></div><div class="p-4 border-t" x-show="cart.length > 0"><div class="p-4 border-b -mx-4 -mt-4"><p class="text-sm text-center mb-1" x-text="shippingMessage"></p><div class="w-full bg-gray-200 rounded-full h-2.5"><div class="bg-amber-400 h-2.5 rounded-full" :style="`width: ${shippingProgress}%`"></div></div></div><div x-show="totalAnnualSavings > 0" class="my-3 bg-green-50 text-green-800 text-center p-2 rounded-lg text-sm font-semibold" x-html="`You're saving an estimated <strong>$${totalAnnualSavings.toFixed(0)}</strong> per year by subscribing!`"></div><div class="flex justify-between font-semibold"><span>Subtotal</span><span x-text="`$${subtotal}`"></span></div><p class="text-xs text-gray-500 mt-1">Shipping & taxes calculated at checkout.</p><button class="w-full mt-4 bg-gray-800 text-white font-bold py-3 rounded-lg hover:bg-black transition">Proceed to Checkout</button></div></div></div></div>
+    <div x-show="isCartOpen" @click.away="isCartOpen = false" class="fixed inset-0 bg-black bg-opacity-50 z-50" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"><div class="fixed top-0 right-0 h-full w-full max-w-sm bg-white shadow-xl flex flex-col" @click.stop x-show="isCartOpen" x-transition:enter="transition ease-in-out duration-300 transform" x-transition:enter-start="translate-x-full" x-transition:enter-end="translate-x-0" x-transition:leave="transition ease-in-out duration-300 transform" x-transition:leave-start="translate-x-0" x-transition:leave-end="translate-x-full"><div class="flex-grow flex flex-col"><div class="flex justify-between items-center p-4 border-b"><h3 class="text-lg font-semibold">Your Cart</h3><button @click="isCartOpen = false" class="text-sm text-indigo-600 hover:underline">← Continue Shopping</button></div><div class="flex-grow overflow-y-auto p-4"><template x-if="cart.length === 0"><div class="text-center pt-10"><p class="text-gray-500 mb-4">Your cart is empty.</p><button @click="selectedProductId = '1'; isCartOpen = false" class="text-indigo-600 font-semibold hover:underline">Shop Bestseller →</button></div></template><div x-show="cartMessage" x-text="cartMessage" class="bg-indigo-50 text-indigo-800 text-sm font-semibold p-3 rounded-lg mb-4 text-center"></div><ul class="divide-y"><template x-for="item in cart" :key="item.id"><li class="flex py-4 space-x-4"><img :src="item.image" class="w-20 h-20 object-cover rounded-md"><div class="flex-1"><h4 class="font-semibold" x-text="item.name"></h4><p class="text-sm text-gray-500" x-text="item.type === 'subscribe' ? `Subscription` : 'One-time Purchase'"></p><p class="text-sm font-semibold" x-text="`$${item.price.toFixed(2)}`"></p><p x-show="item.type === 'subscribe'" class="text-xs text-green-600 font-semibold">Saving 15%</p><div class="mt-2 flex items-center justify-between"><div class="flex items-center border rounded"><button @click="updateQuantity(item.id, item.quantity - 1)" class="px-2 py-1">-</button><span class="px-3" x-text="item.quantity"></span><button @click="updateQuantity(item.id, item.quantity + 1)" class="px-2 py-1">+</button></div><button @click="removeFromCart(item.id)" class="text-xs text-red-500 hover:underline">Remove</button></div></div></li></template></ul><div x-show="cartRecommendation" class="mt-6 pt-6 border-t"><div class="p-3 rounded-lg bg-gradient-to-r from-gray-50 to-indigo-50"><h4 class="font-semibold text-center text-gray-800 mb-2" x-text="cartRecommendation.title"></h4><div class="flex items-center space-x-3"><img :src="cartRecommendation.image" class="w-16 h-16 object-cover rounded-md"><div class="flex-1"><p class="text-sm font-semibold" x-text="cartRecommendation.name"></p><p class="text-xs text-gray-600" x-text="cartRecommendation.reason"></p></div><button @click="handleRecommendationClick(cartRecommendation)" class="bg-indigo-600 text-white font-bold text-xs py-2 px-3 rounded-full hover:bg-indigo-700 transition" x-text="cartRecommendation.cta"></button></div></div></div></div><div class="p-4 border-t" x-show="cart.length > 0"><div class="p-4 border-b -mx-4 -mt-4"><p class="text-sm text-center mb-1" x-text="shippingMessage"></p><div class="w-full bg-gray-200 rounded-full h-2.5"><div class="bg-amber-400 h-2.5 rounded-full" :style="`width: ${shippingProgress}%`"></div></div></div><div x-show="totalAnnualSavings > 0" class="my-3 bg-green-50 text-green-800 text-center p-2 rounded-lg text-sm font-semibold" x-html="`You're saving an estimated <strong>$${totalAnnualSavings.toFixed(0)}</strong> per year by subscribing!`"></div><div class="flex justify-between font-semibold"><span>Subtotal</span><span x-text="`$${subtotal}`"></span></div><p class="text-xs text-gray-500 mt-1">Shipping & taxes calculated at checkout.</p>
+<button 
+    @click="redirectToCheckout()" 
+    class="w-full mt-4 bg-gray-800 text-white font-bold py-3 rounded-lg hover:bg-black transition"
+>
+    Proceed to Checkout
+</button></div></div></div></div>
 
 <script>
 function productPage() {
@@ -172,9 +178,52 @@ function productPage() {
         handleRecommendationClick(rec) { if (rec.type === 'product') { const id = `${rec.id}-one-time`; if (!this.cart.some(i => i.id === id)) { this.cart.push({ id: id, productId: rec.id, name: this.products[rec.id].name, price: this.products[rec.id].price, quantity: 1, type: 'one-time', image: this.products[rec.id].images.thumbnails[0] }); this.cartMessage = "Great addition! Your routine is looking complete."; } } else if (rec.type === 'bundle') { const bundle = this.products[rec.id]; this.cart = this.cart.filter(item => !bundle.components.includes(item.productId)); this.addBundleToCart(rec.id); this.cartMessage = "Smart upgrade! You're saving with the Complete Set."; } },
         triggerSuccess(message) { this.cartMessage = message; this.isCartOpen = true; this.justAdded = true; this.showSuccessToast = true; setTimeout(() => this.justAdded = false, 2000); setTimeout(() => this.showSuccessToast = false, 3000); },
         removeFromCart(id) { this.cart = this.cart.filter(item => item.id !== id); if(this.cart.length === 0) this.cartMessage = ''; },
-        updateQuantity(id, newQuantity) { const item = this.cart.find(i => i.id === id); if (item && newQuantity > 0) item.quantity = newQuantity; else if (item && newQuantity <= 0) this.removeFromCart(id); }
+        updateQuantity(id, newQuantity) { const item = this.cart.find(i => i.id === id); if (item && newQuantity > 0) item.quantity = newQuantity; else if (item && newQuantity <= 0) this.removeFromCart(id); },
+        redirectToCheckout() {
+        
+            const baseURL = 'https://www.shopmamasol.com';
+            const checkoutPath = '/cart/add?';
+
+            const lineItems = [];            
+
+            this.cart.forEach(item => {
+                console.log({item},210)
+    
+                let variantId;
+                let sellingPlanId;
+                if (item.productId === 1) variantId = '48438413689125';
+                if (item.productId === 1 && item.type === 'subscribe') sellingPlanId = '690753732901';
+                if (item.productId === 2) variantId = '48438405366053';
+                if (item.productId === 2 && item.type === 'subscribe') sellingPlanId = '690753569061';
+                if (item.productId === 3) variantId = '44789635023141';
+                if (item.productId === 3 && item.type === 'subscribe') sellingPlanId = '690753536293';
+                if (item.productId === 5) variantId = '49278006001957';
+                if (item.productId === 7) variantId = '49278045651237';
+
+                if (item.type === 'one-time') {
+                     lineItems.push(`items[][id]=${variantId}&items[][quantity]=${item.quantity}`);
+                }
+                else if (item.type === 'subscribe') {
+                     lineItems.push(`items[][id]=${variantId}&items[][quantity]=${item.quantity}&items[][selling_plan]=${sellingPlanId}`);
+                }
+            });
+            const fullURL = `${baseURL}${checkoutPath}${lineItems.join('&')}&return_to=/checkout`;
+            console.log({lineItems},210)
+            
+
+            if (lineItems.length > 0) {
+                window.location.href = fullURL;
+            } else {
+                alert('Your cart is empty!');
+                this.isCartOpen = false;
+            }
+        }
     }
 }
+
+
+
+
 </script>
 </body>
 </html>
