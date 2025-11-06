@@ -136,16 +136,14 @@
 // For a simple static page, you may need a UMD/CDN version or use a tool like import maps.
 // For demonstration, we assume 'createStorefrontClient' is globally available.
 const createStorefrontClient = window.createStorefrontClient || (() => ({
-    request: () => Promise.resolve({ data: { cartCreate: { cart: { webUrl: 'https://placeholder.shopify.com/checkout' }, userErrors: [] } } }) 
+    request: () => Promise.resolve({ data: { cartCreate: { cart: { webUrl: 'https://shopmamasol.com/checkout' }, userErrors: [] } } }) 
 }));
 
 
 function productPage() {
-    // ⚠️ CRITICAL: REPLACE THESE WITH YOUR ACTUAL STOREFRONT CREDENTIALS
     const SHOPIFY_DOMAIN = 'https://www.shopmamasol.com/'; 
     const STOREFRONT_ACCESS_TOKEN = 'f0ef66127d21636b5058b4af3df3e4e2'; 
-    const API_VERSION = '2024-07'; // Ensure this version is still supported
-    // END CRITICAL SECTION
+    const API_VERSION = '2024-07';
 
     const client = createStorefrontClient({
         storeDomain: SHOPIFY_DOMAIN,
