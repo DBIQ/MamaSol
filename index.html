@@ -12,22 +12,14 @@
         body { font-family: 'Inter', sans-serif; padding-bottom: 90px; }
         @media (min-width: 768px) { body { padding-bottom: 0; } }
         [x-cloak] { display: none !important; }
-        .product-choice-radio:checked + label { border-color: #4f46e5; box-shadow: 0 0 0 2px #4f46e5;
-        background-color: #f0f5ff; }
-        .purchase-option-radio:checked + label { border-color: #4f46e5;
-        box-shadow: 0 0 0 2px #4f46e5; }
-        .logo-wall img { filter: grayscale(100%);
-        opacity: 0.7; transition: all 0.2s ease-in-out; }
-        .logo-wall img:hover { filter: grayscale(0%);
-        opacity: 1; }
-        @keyframes slide-up { from { transform: translateY(100%);
-        } to { transform: translateY(0); } }
-        .animate-slide-up { animation: slide-up 0.3s ease-out;
-        }
-        @keyframes fade-in-down { from { opacity: 0; transform: translateY(-20px);
-        } to { opacity: 1; transform: translateY(0); } }
-        .animate-fade-in-down { animation: fade-in-down 0.5s ease-out forwards;
-        }
+        .product-choice-radio:checked + label { border-color: #4f46e5; box-shadow: 0 0 0 2px #4f46e5; background-color: #f0f5ff; }
+        .purchase-option-radio:checked + label { border-color: #4f46e5; box-shadow: 0 0 0 2px #4f46e5; }
+        .logo-wall img { filter: grayscale(100%); opacity: 0.7; transition: all 0.2s ease-in-out; }
+        .logo-wall img:hover { filter: grayscale(0%); opacity: 1; }
+        @keyframes slide-up { from { transform: translateY(100%); } to { transform: translateY(0); } }
+        .animate-slide-up { animation: slide-up 0.3s ease-out; }
+        @keyframes fade-in-down { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-fade-in-down { animation: fade-in-down 0.5s ease-out forwards; }
     </style>
 </head>
 <body class="bg-white" x-data="productPage()" x-init="init()" x-cloak>
@@ -36,151 +28,81 @@
         <div class="container mx-auto px-4 flex justify-between items-center">
             <img src="https://www.shopmamasol.com/cdn/shop/files/mamasol-soft-black-3_887x.png?v=1680828495" alt="Mama Sol Logo" class="h-8">
             <button @click="isCartOpen = true" class="relative">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 
-                5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
                 <span x-show="cartCount > 0" class="absolute -top-2 -right-2 bg-indigo-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center" x-text="cartCount"></span>
             </button>
         </header>
     
     <div x-show="showDesktopSticky" x-transition:enter="animate-fade-in-down" class="fixed top-0 left-0 right-0 bg-white/80 backdrop-blur-sm border-b border-gray-200 z-30 hidden md:block">
-   
-         <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+        <div class="container mx-auto px-4 py-3 flex items-center justify-between">
             <div class="flex items-center space-x-4">
                 <img :src="selectedProduct.images.thumbnails[0]" class="w-12 h-12 rounded-md object-cover">
                 <div><p class="font-bold text-gray-800" x-text="selectedProduct.name"></p><p class="text-sm text-gray-600">Price: <span class="font-bold text-indigo-600" x-text="`$${currentPrice.toFixed(2)}`"></span></p></div>
             </div>
-            <div class="w-1/3"><button @click="addToCart()" 
-            class="w-full bg-amber-400 hover:bg-amber-500 text-black font-bold py-3 px-6 rounded-lg shadow-lg transition-all duration-300 transform hover:scale-105">Add to Cart</button></div>
+            <div class="w-1/3"><button @click="addToCart()" class="w-full bg-amber-400 hover:bg-amber-500 text-black font-bold py-3 px-6 rounded-lg shadow-lg transition-all duration-300 transform hover:scale-105">Add to Cart</button></div>
         </div>
     </div>
 
     <main class="container mx-auto px-4 py-8 md:py-12">
         
         <div id="main-cta-section-mobile" class="md:hidden">
-            <div class="flex items-center space-x-4 mb-2"><div class="flex -space-x-4"><img class="w-14 h-14 rounded-full border-2 border-white object-cover" src="https://www.shopmamasol.com/cdn/shop/files/upscaled-4x-Arielle.png?v=1747876194" alt="Arielle Moody"><img class="w-14 h-14 rounded-full border-2 border-white object-cover" src="https://www.shopmamasol.com/cdn/shop/files/upscaled-4x-Thalia.png?v=1747875979" alt="Tahlia Disisto"><img class="w-14 h-14 rounded-full border-2 border-white object-cover" src="https://www.shopmamasol.com/cdn/shop/files/upscaled-4x-Sheri-full.png?v=1747875855" alt="Dr.
-            Sheri Rowen"></div><p class="text-sm text-gray-600 italic">Created by moms, for moms, with a leading doctor's expertise.</p></div>
+            <div class="flex items-center space-x-4 mb-2"><div class="flex -space-x-4"><img class="w-14 h-14 rounded-full border-2 border-white object-cover" src="https://www.shopmamasol.com/cdn/shop/files/upscaled-4x-Arielle.png?v=1747876194" alt="Arielle Moody"><img class="w-14 h-14 rounded-full border-2 border-white object-cover" src="https://www.shopmamasol.com/cdn/shop/files/upscaled-4x-Thalia.png?v=1747875979" alt="Tahlia Disisto"><img class="w-14 h-14 rounded-full border-2 border-white object-cover" src="https://www.shopmamasol.com/cdn/shop/files/upscaled-4x-Sheri-full.png?v=1747875855" alt="Dr. Sheri Rowen"></div><p class="text-sm text-gray-600 italic">Created by moms, for moms, with a leading doctor's expertise.</p></div>
             <h2 class="text-3xl font-extrabold text-gray-900 leading-tight">Immediate Sun Protection</h2>
             <p class="mt-1 text-lg text-gray-700">Because you don't have time to wait.</p>
             <div class="my-4"><div class="relative"><img :src="selectedProduct.images.main" alt="Main product image" class="w-full h-auto object-cover rounded-lg shadow-md transition-opacity duration-300" :key="selectedProduct.id"><span class="absolute top-4 left-4 bg-indigo-600 text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider" x-text="selectedProduct.badge"></span></div></div>
-         
             <div class="mt-3" x-show="selectedProduct.award"><div class="bg-gray-100 p-2 rounded-lg inline-flex items-center"><img :src="selectedProduct.award.logo" :alt="selectedProduct.award.name" class="h-6 mr-2"><span class="font-bold text-xs text-gray-800" x-text="selectedProduct.award.winner"></span></div></div>
             <div class="mt-4 space-y-3"><template x-for="productId in ['1', '3', '2']"><div :key="productId" class="relative"><input type="radio" :id="`mobile-choice-${productId}`" :value="productId" x-model="selectedProductId" class="sr-only product-choice-radio"><label :for="`mobile-choice-${productId}`" class="flex items-center p-3 border-2 rounded-lg cursor-pointer transition"><img :src="products[productId].images.thumbnails[0]" class="w-12 h-12 rounded-md object-cover mr-3"><div class="flex-1"><span class="font-semibold text-gray-900" x-text="products[productId].name"></span><p class="text-sm text-gray-600" x-text="products[productId].tagline"></p></div><span class="font-bold text-lg text-gray-900" x-text="`$${products[productId].price.toFixed(2)}`"></span></label><span x-show="products[productId].isBestseller" class="absolute -top-2.5 left-4 bg-amber-400 text-black text-xs font-bold px-2 py-0.5 rounded-full">BESTSELLER</span></div></template></div>
-            <div class="mt-4 space-y-3"><input type="radio" id="mobile-subscribe" value="subscribe" x-model="purchaseType" 
-            class="sr-only purchase-option-radio"><label for="mobile-subscribe" class="p-4 border-2 rounded-lg cursor-pointer transition block"> <div class="flex justify-between items-start"> <div><div class="flex items-center"><h3 class="font-bold text-lg">Subscribe</h3><span class="ml-2 bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">15% OFF</span></div><ul class="mt-2 space-y-1 text-sm text-gray-600"><li class="flex items-center"><svg class="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Free U.S. shipping on all orders</li><li class="flex items-center"><svg class="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Pause or cancel anytime</li><li class="flex items-center"><svg class="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Access to special VIP offers</li></ul></div><div 
-            class="text-right flex-shrink-0"><p class="text-2xl font-bold text-gray-900" x-text="`$${(selectedProduct.price * 0.85).toFixed(2)}`"></p><p class="text-sm text-green-600 font-semibold" x-text="`You save $${(selectedProduct.price * 0.15).toFixed(2)}`"></p></div></div></label><input type="radio" id="mobile-one-time" value="one-time" x-model="purchaseType" class="sr-only purchase-option-radio"><label for="mobile-one-time" class="flex items-center justify-between p-4 border-2 rounded-lg cursor-pointer transition"><span class="font-bold text-lg">One-time purchase</span><span class="font-bold text-2xl" x-text="`$${selectedProduct.price.toFixed(2)}`"></span></label></div>
+            <div class="mt-4 space-y-3"><input type="radio" id="mobile-subscribe" value="subscribe" x-model="purchaseType" class="sr-only purchase-option-radio"><label for="mobile-subscribe" class="p-4 border-2 rounded-lg cursor-pointer transition block"> <div class="flex justify-between items-start"> <div><div class="flex items-center"><h3 class="font-bold text-lg">Subscribe</h3><span class="ml-2 bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">15% OFF</span></div><ul class="mt-2 space-y-1 text-sm text-gray-600"><li class="flex items-center"><svg class="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Free U.S. shipping on all orders</li><li class="flex items-center"><svg class="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Pause or cancel anytime</li><li class="flex items-center"><svg class="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Access to special VIP offers</li></ul></div><div class="text-right flex-shrink-0"><p class="text-2xl font-bold text-gray-900" x-text="`$${(selectedProduct.price * 0.85).toFixed(2)}`"></p><p class="text-sm text-green-600 font-semibold" x-text="`You save $${(selectedProduct.price * 0.15).toFixed(2)}`"></p></div></div></label><input type="radio" id="mobile-one-time" value="one-time" x-model="purchaseType" class="sr-only purchase-option-radio"><label for="mobile-one-time" class="flex items-center justify-between p-4 border-2 rounded-lg cursor-pointer transition"><span class="font-bold text-lg">One-time purchase</span><span class="font-bold text-2xl" x-text="`$${selectedProduct.price.toFixed(2)}`"></span></label></div>
             <div class="mt-4 flex items-center justify-center space-x-6 text-sm text-gray-600 font-medium"><div class="flex items-center">🩺 <span class="ml-2">Doctor-Developed</span></div><div class="flex items-center">👶 <span class="ml-2">Mom-Owned</span></div><div class="flex items-center">🤰 <span class="ml-2">Pregnancy-Safe</span></div></div>
         </div>
 
         <div id="main-cta-section" class="hidden md:grid grid-cols-2 gap-8 lg:gap-12">
-          
             <div>
                 <div class="relative mb-4"><img :src="selectedProduct.images.main" alt="Main product image" class="w-full h-auto object-cover rounded-lg shadow-md transition-opacity duration-300" :key="selectedProduct.id"><span class="absolute top-4 left-4 bg-indigo-600 text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider" x-text="selectedProduct.badge"></span></div>
                 <div class="hidden sm:flex space-x-2 flex-wrap"><template x-for="thumb in selectedProduct.images.thumbnails"><button @click="selectedProduct.images.main = thumb" :class="{'ring-2 ring-indigo-500': selectedProduct.images.main === thumb}" class="w-20 h-20 rounded-md overflow-hidden transition mb-2"><img :src="thumb" class="w-full h-full object-cover"></button></template></div>
             </div>
-  
             <div>
-                <div class="flex items-center space-x-4 mb-2"><div class="flex -space-x-4"><img class="w-14 h-14 rounded-full border-2 border-white object-cover" src="https://www.shopmamasol.com/cdn/shop/files/upscaled-4x-Arielle.png?v=1747876194" alt="Arielle Moody"><img class="w-14 h-14 rounded-full border-2 border-white object-cover" src="https://www.shopmamasol.com/cdn/shop/files/upscaled-4x-Thalia.png?v=1747875979" alt="Tahlia Disisto"><img class="w-14 h-14 rounded-full border-2 border-white object-cover" src="https://www.shopmamasol.com/cdn/shop/files/upscaled-4x-Sheri-full.png?v=1747875855" alt="Dr.
-                Sheri Rowen"></div><p class="text-sm text-gray-600 italic">Created by moms, for moms, with a leading doctor's expertise.</p></div>
+                <div class="flex items-center space-x-4 mb-2"><div class="flex -space-x-4"><img class="w-14 h-14 rounded-full border-2 border-white object-cover" src="https://www.shopmamasol.com/cdn/shop/files/upscaled-4x-Arielle.png?v=1747876194" alt="Arielle Moody"><img class="w-14 h-14 rounded-full border-2 border-white object-cover" src="https://www.shopmamasol.com/cdn/shop/files/upscaled-4x-Thalia.png?v=1747875979" alt="Tahlia Disisto"><img class="w-14 h-14 rounded-full border-2 border-white object-cover" src="https://www.shopmamasol.com/cdn/shop/files/upscaled-4x-Sheri-full.png?v=1747875855" alt="Dr. Sheri Rowen"></div><p class="text-sm text-gray-600 italic">Created by moms, for moms, with a leading doctor's expertise.</p></div>
                 <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 leading-tight">Immediate Sun Protection</h2>
                 <p class="mt-1 text-lg text-gray-700">Because you don't have time to wait.</p>
                 <div class="mt-3" x-show="selectedProduct.award"><div class="bg-gray-100 p-2 rounded-lg inline-flex items-center"><img :src="selectedProduct.award.logo" :alt="selectedProduct.award.name" class="h-6 mr-2"><span class="font-bold text-xs text-gray-800" x-text="selectedProduct.award.winner"></span></div></div>
-        
                 <div class="mt-4 space-y-3"><template x-for="productId in ['1', '3', '2']"><div :key="productId" class="relative"><input type="radio" :id="`desktop-choice-${productId}`" :value="productId" x-model="selectedProductId" class="sr-only product-choice-radio"><label :for="`desktop-choice-${productId}`" class="flex items-center p-3 border-2 rounded-lg cursor-pointer transition"><img :src="products[productId].images.thumbnails[0]" class="w-12 h-12 rounded-md object-cover mr-3"><div class="flex-1"><span class="font-semibold text-gray-900" x-text="products[productId].name"></span><p class="text-sm text-gray-600" x-text="products[productId].tagline"></p></div><span class="font-bold text-lg text-gray-900" x-text="`$${products[productId].price.toFixed(2)}`"></span></label><span x-show="products[productId].isBestseller" class="absolute -top-2.5 left-4 bg-amber-400 text-black text-xs font-bold px-2 py-0.5 rounded-full">BESTSELLER</span></div></template></div>
-                <div class="mt-4 space-y-3"><input type="radio" id="desktop-subscribe" value="subscribe" x-model="purchaseType" class="sr-only purchase-option-radio"><label for="desktop-subscribe" class="p-4 border-2 rounded-lg cursor-pointer transition block"><div class="flex justify-between items-start"><div><div class="flex items-center"><h3 class="font-bold text-lg">Subscribe</h3><span class="ml-2 bg-green-100 
-                text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">15% OFF</span></div><ul class="mt-2 space-y-1 text-sm text-gray-600"><li class="flex items-center"><svg class="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Free U.S. shipping on all orders</li><li class="flex items-center"><svg class="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Pause or cancel anytime</li><li class="flex items-center"><svg class="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Access to special VIP offers</li></ul></div><div class="text-right flex-shrink-0"><p class="text-2xl font-bold text-gray-900" x-text="`$${(selectedProduct.price * 0.85).toFixed(2)}`"></p><p class="text-sm text-green-600 font-semibold" x-text="`You save $${(selectedProduct.price * 0.15).toFixed(2)}`"></p></div></div></label><input type="radio" id="desktop-one-time" value="one-time" x-model="purchaseType" 
-                class="sr-only purchase-option-radio"><label for="desktop-one-time" class="flex items-center justify-between p-4 border-2 rounded-lg cursor-pointer transition"><span class="font-bold text-lg">One-time purchase</span><span class="font-bold text-2xl" x-text="`$${selectedProduct.price.toFixed(2)}`"></span></label></div>
+                <div class="mt-4 space-y-3"><input type="radio" id="desktop-subscribe" value="subscribe" x-model="purchaseType" class="sr-only purchase-option-radio"><label for="desktop-subscribe" class="p-4 border-2 rounded-lg cursor-pointer transition block"><div class="flex justify-between items-start"><div><div class="flex items-center"><h3 class="font-bold text-lg">Subscribe</h3><span class="ml-2 bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">15% OFF</span></div><ul class="mt-2 space-y-1 text-sm text-gray-600"><li class="flex items-center"><svg class="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Free U.S. shipping on all orders</li><li class="flex items-center"><svg class="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Pause or cancel anytime</li><li class="flex items-center"><svg class="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Access to special VIP offers</li></ul></div><div class="text-right flex-shrink-0"><p class="text-2xl font-bold text-gray-900" x-text="`$${(selectedProduct.price * 0.85).toFixed(2)}`"></p><p class="text-sm text-green-600 font-semibold" x-text="`You save $${(selectedProduct.price * 0.15).toFixed(2)}`"></p></div></div></label><input type="radio" id="desktop-one-time" value="one-time" x-model="purchaseType" class="sr-only purchase-option-radio"><label for="desktop-one-time" class="flex items-center justify-between p-4 border-2 rounded-lg cursor-pointer transition"><span class="font-bold text-lg">One-time purchase</span><span class="font-bold text-2xl" x-text="`$${selectedProduct.price.toFixed(2)}`"></span></label></div>
                 <div class="mt-4"><button @click="addToCart()" :class="{'bg-green-600 text-white': justAdded, 'bg-amber-400 hover:bg-amber-500 text-black': !justAdded}" class="w-full font-bold py-3 px-6 rounded-lg shadow-lg transition-all duration-300 transform hover:scale-105 flex items-center justify-center text-lg"><span x-show="!justAdded" x-text="`Add to Cart - $${(currentPrice).toFixed(2)}`"></span><span x-show="justAdded">✓ Added to Cart!</span></button><div class="mt-3 text-center"><button class="w-full bg-gray-800 text-white font-bold py-3 px-10 rounded-lg text-sm hover:bg-black transition">Buy with ShopPay</button></div></div>
-                <div class="mt-4 flex items-center justify-center 
-                space-x-6 text-sm text-gray-600 font-medium"><div class="flex items-center">🩺 <span class="ml-2">Doctor-Developed</span></div><div class="flex items-center">👶 <span class="ml-2">Mom-Owned</span></div><div class="flex items-center">🤰 <span class="ml-2">Pregnancy-Safe</span></div></div>
+                <div class="mt-4 flex items-center justify-center space-x-6 text-sm text-gray-600 font-medium"><div class="flex items-center">🩺 <span class="ml-2">Doctor-Developed</span></div><div class="flex items-center">👶 <span class="ml-2">Mom-Owned</span></div><div class="flex items-center">🤰 <span class="ml-2">Pregnancy-Safe</span></div></div>
             </div>
         </div>
         
-        <div class="mt-16 bg-white -mx-4 px-4 py-12"><div class="max-w-4xl mx-auto"><div class="flex flex-col items-center space-y-6"><img src="https://www.shopmamasol.com/cdn/shop/files/upscaled-4x-Sheri-full.png?v=1747875855" alt="Dr.
-            Sheri Rowen" class="w-32 h-32 rounded-full object-cover border-4 border-white shadow-lg flex-shrink-0"><div class="text-center"><h3 class="text-xl font-bold text-gray-800">Developed with Our Medical Expert</h3><p class="text-gray-600 mt-2 max-w-xl mx-auto">Our formulas are guided by <span class="font-bold">Dr. Sheri Rowen, MD</span>, a Johns Hopkins-trained ophthalmologist specializing in safe, effective skincare for the most sensitive areas.</p></div></div><div class="mt-8 border-t border-gray-200 pt-6"><p class="text-center text-sm text-gray-500 uppercase tracking-wider font-semibold">As Featured In</p><div class="mt-4 grid grid-cols-5 gap-4 items-center logo-wall">
+        <div class="mt-16 bg-white -mx-4 px-4 py-12"><div class="max-w-4xl mx-auto"><div class="flex flex-col items-center space-y-6"><img src="https://www.shopmamasol.com/cdn/shop/files/upscaled-4x-Sheri-full.png?v=1747875855" alt="Dr. Sheri Rowen" class="w-32 h-32 rounded-full object-cover border-4 border-white shadow-lg flex-shrink-0"><div class="text-center"><h3 class="text-xl font-bold text-gray-800">Developed with Our Medical Expert</h3><p class="text-gray-600 mt-2 max-w-xl mx-auto">Our formulas are guided by <span class="font-bold">Dr. Sheri Rowen, MD</span>, a Johns Hopkins-trained ophthalmologist specializing in safe, effective skincare for the most sensitive areas.</p></div></div><div class="mt-8 border-t border-gray-200 pt-6"><p class="text-center text-sm text-gray-500 uppercase tracking-wider font-semibold">As Featured In</p><div class="mt-4 grid grid-cols-5 gap-4 items-center logo-wall">
             <div class="flex justify-center items-center h-12"><img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Harper%27s_Bazaar_Logo.svg" class="max-h-8 w-auto object-contain" alt="Harper's Bazaar"></div>
-            <div class="flex justify-center items-center 
-            h-12"><img src="https://upload.wikimedia.org/wikipedia/commons/2/27/SHAPE_Logo.svg" class="max-h-8 w-auto object-contain" alt="Shape"></div>
+            <div class="flex justify-center items-center h-12"><img src="https://upload.wikimedia.org/wikipedia/commons/2/27/SHAPE_Logo.svg" class="max-h-8 w-auto object-contain" alt="Shape"></div>
             <div class="flex justify-center items-center h-12"><img src="https://prnewswire2-a.akamaihd.net/p/1893751/sp/189375100/thumbnail/entry_id/0_41ac0hhh/def_height/2700/def_width/2700/version/100012/type/1" class="max-h-10 w-auto object-contain" alt="NewBeauty"></div>
             <div class="flex justify-center items-center h-12"><img src="https://upload.wikimedia.org/wikipedia/commons/7/76/Today_logo.svg" class="max-h-10 w-auto object-contain" alt="The TODAY Show"></div>
             <div class="flex justify-center items-center h-12"><img src="https://upload.wikimedia.org/wikipedia/commons/e/e4/BuzzFeed.svg" class="max-h-8 w-auto object-contain" alt="BuzzFeed"></div>
         </div></div></div></div>
         
-        <div class="mt-16 bg-[#F8F7FF] -mx-4 px-4 py-12"><div 
-        class="max-w-2xl mx-auto text-center"><span class="text-yellow-400 text-3xl leading-none">★★★★★</span><p class="text-gray-800 text-lg italic mt-2" x-text="selectedProduct.testimonial.text"></p><p class="text-sm text-gray-600 font-semibold mt-2" x-text="`- ${selectedProduct.testimonial.author}`"></p></div></div>
+        <div class="mt-16 bg-[#F8F7FF] -mx-4 px-4 py-12"><div class="max-w-2xl mx-auto text-center"><span class="text-yellow-400 text-3xl leading-none">★★★★★</span><p class="text-gray-800 text-lg italic mt-2" x-text="selectedProduct.testimonial.text"></p><p class="text-sm text-gray-600 font-semibold mt-2" x-text="`- ${selectedProduct.testimonial.author}`"></p></div></div>
         
-        <div class="mt-16"><h2 class="text-3xl font-extrabold text-gray-900 text-center">The Mineral Difference</h2><div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto"><div class="bg-white border border-gray-200 p-6 rounded-lg text-center"><h3 class="font-bold text-xl text-gray-800">Mama Sol (Mineral)</h3><p class="text-green-600 font-semibold mt-2 text-lg">✅ Works Instantly</p><p class="mt-1 text-gray-600">Physical barrier protection the second you put it on.
-        No waiting.</p><h4 class="font-semibold mt-4">What's Inside:</h4><p class="text-sm">Zinc Oxide</p></div><div class="bg-white border border-gray-200 p-6 rounded-lg text-center"><h3 class="font-bold text-xl text-gray-800">Others (Chemical)</h3><p class="text-red-600 font-semibold mt-2 text-lg">❌ Wait 15-20 Minutes</p><p class="mt-1 text-gray-600">Needs time to absorb into the skin before it starts working.</p><h4 class="font-semibold mt-4">What We Leave Out:</h4><p class="text-sm text-red-700">Oxybenzone, Avobenzone, Homosalate, Octinoxate, Octisalate, Octocrylene</p></div></div><div class="mt-12 text-center max-w-2xl mx-auto"><p class="text-xl font-bold text-gray-900">Translation: You can apply Mama Sol and walk out the door.
-        <br> <span class="text-indigo-600">No waiting. No white cast. No compromise.</span></p></div></div>
+        <div class="mt-16"><h2 class="text-3xl font-extrabold text-gray-900 text-center">The Mineral Difference</h2><div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto"><div class="bg-white border border-gray-200 p-6 rounded-lg text-center"><h3 class="font-bold text-xl text-gray-800">Mama Sol (Mineral)</h3><p class="text-green-600 font-semibold mt-2 text-lg">✅ Works Instantly</p><p class="mt-1 text-gray-600">Physical barrier protection the second you put it on. No waiting.</p><h4 class="font-semibold mt-4">What's Inside:</h4><p class="text-sm">Zinc Oxide</p></div><div class="bg-white border border-gray-200 p-6 rounded-lg text-center"><h3 class="font-bold text-xl text-gray-800">Others (Chemical)</h3><p class="text-red-600 font-semibold mt-2 text-lg">❌ Wait 15-20 Minutes</p><p class="mt-1 text-gray-600">Needs time to absorb into the skin before it starts working.</p><h4 class="font-semibold mt-4">What We Leave Out:</h4><p class="text-sm text-red-700">Oxybenzone, Avobenzone, Homosalate, Octinoxate, Octisalate, Octocrylene</p></div></div><div class="mt-12 text-center max-w-2xl mx-auto"><p class="text-xl font-bold text-gray-900">Translation: You can apply Mama Sol and walk out the door. <br> <span class="text-indigo-600">No waiting. No white cast. No compromise.</span></p></div></div>
         
-        <div class="mt-16 pt-12 border-t"><h2 class="text-3xl font-extrabold text-gray-900 text-center">Complete Your Ritual & Get The Best Value</h2><div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto"><div class="border rounded-lg p-6 flex flex-col items-center text-center shadow-sm"><img src="https://www.shopmamasol.com/cdn/shop/files/TheFaceandBodyDuo.png?v=1721757674&width=640" class="w-full h-48 object-contain rounded-md"><h3 class="text-xl font-bold mt-4">The Face & Body Duo</h3><p class="text-indigo-600 font-bold mt-1">Just $41 per product</p><div class="mt-4"><span class="text-2xl font-bold">$82.00</span><span class="text-gray-500 line-through ml-2">$92.00</span></div><button @click="addBundleToCart(5)" class="mt-4 w-full bg-gray-800 text-white font-bold py-3 rounded-lg hover:bg-black transition">Add Duo</button></div><div class="border-2 border-indigo-500 rounded-lg p-6 flex flex-col items-center text-center shadow-lg relative"><span class="absolute 
-        -top-3 bg-indigo-600 text-white text-sm font-bold px-3 py-1 rounded-full">BEST VALUE SET</span><img src="https://www.shopmamasol.com/cdn/shop/files/TheCompleteFaceBodyandLipSet.png?v=1721757668&width=640" class="w-full h-48 object-contain rounded-md"><h3 class="text-xl font-bold mt-4">The Complete Set</h3><p class="text-indigo-600 font-bold mt-1">Our entire routine, smarter price</p><div class="mt-4"><span class="text-2xl font-bold">$112.00</span><span class="text-gray-500 line-through ml-2">$126.00</span></div><button @click="addBundleToCart(7)" class="mt-4 w-full bg-indigo-600 text-white font-bold py-3 rounded-lg hover:bg-indigo-700 transition">Add Complete Set</button></div></div></div>
+        <div class="mt-16 pt-12 border-t"><h2 class="text-3xl font-extrabold text-gray-900 text-center">Complete Your Ritual & Get The Best Value</h2><div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto"><div class="border rounded-lg p-6 flex flex-col items-center text-center shadow-sm"><img src="https://www.shopmamasol.com/cdn/shop/files/TheFaceandBodyDuo.png?v=1721757674&width=640" class="w-full h-48 object-contain rounded-md"><h3 class="text-xl font-bold mt-4">The Face & Body Duo</h3><p class="text-indigo-600 font-bold mt-1">Just $41 per product</p><div class="mt-4"><span class="text-2xl font-bold">$82.00</span><span class="text-gray-500 line-through ml-2">$92.00</span></div><button @click="addBundleToCart(5)" class="mt-4 w-full bg-gray-800 text-white font-bold py-3 rounded-lg hover:bg-black transition">Add Duo</button></div><div class="border-2 border-indigo-500 rounded-lg p-6 flex flex-col items-center text-center shadow-lg relative"><span class="absolute -top-3 bg-indigo-600 text-white text-sm font-bold px-3 py-1 rounded-full">BEST VALUE SET</span><img src="https://www.shopmamasol.com/cdn/shop/files/TheCompleteFaceBodyandLipSet.png?v=1721757668&width=640" class="w-full h-48 object-contain rounded-md"><h3 class="text-xl font-bold mt-4">The Complete Set</h3><p class="text-indigo-600 font-bold mt-1">Our entire routine, smarter price</p><div class="mt-4"><span class="text-2xl font-bold">$112.00</span><span class="text-gray-500 line-through ml-2">$126.00</span></div><button @click="addBundleToCart(7)" class="mt-4 w-full bg-indigo-600 text-white font-bold py-3 rounded-lg hover:bg-indigo-700 transition">Add Complete Set</button></div></div></div>
     </main>
     
     <div class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-3 shadow-lg md:hidden flex items-center justify-between z-30 animate-slide-up">
         <div class="text-left"><p class="text-xs text-gray-600">Price</p><p class="font-bold text-lg" x-text="`$${currentPrice.toFixed(2)}`"></p></div>
-        <button @click="addToCart()" :class="{'bg-green-600 text-white': justAdded, 'bg-amber-400 text-black': 
-        !justAdded}" class="w-2/3 font-bold py-3 px-4 rounded-lg shadow-lg transition-colors duration-300">
+        <button @click="addToCart()" :class="{'bg-green-600 text-white': justAdded, 'bg-amber-400 text-black': !justAdded}" class="w-2/3 font-bold py-3 px-4 rounded-lg shadow-lg transition-colors duration-300">
             <span x-show="!justAdded">Add to Cart</span><span x-show="justAdded">✓ Added!</span>
         </button>
     </div>
     <div class="fixed top-20 right-4 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg z-50" x-show="showSuccessToast" x-transition @click.away="showSuccessToast = false">🎉 Added to your cart!</div>
-
-    <div x-show="isCartOpen" @click.away="isCartOpen = false" class="fixed inset-0 bg-black bg-opacity-50 z-50" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"><div class="fixed top-0 right-0 h-full w-full max-w-sm bg-white shadow-xl flex flex-col" @click.stop x-show="isCartOpen" x-transition:enter="transition ease-in-out duration-300 transform" x-transition:enter-start="translate-x-full" x-transition:enter-end="translate-x-0" 
-        x-transition:leave="transition ease-in-out duration-300 transform" x-transition:leave-start="translate-x-0" x-transition:leave-end="translate-x-full"><div class="flex-grow flex flex-col"><div class="flex justify-between items-center p-4 border-b"><h3 class="text-lg font-semibold">Your Cart</h3><button @click="isCartOpen = false" class="text-sm text-indigo-600 hover:underline">← Continue Shopping</button></div><div class="flex-grow overflow-y-auto p-4"><template x-if="cart.length === 0"><div class="text-center pt-10"><p class="text-gray-500 mb-4">Your cart is empty.</p><button @click="selectedProductId = '1';
-        isCartOpen = false" class="text-indigo-600 font-semibold hover:underline">Shop Bestseller →</button></div></template><div x-show="cartMessage" x-text="cartMessage" class="bg-indigo-50 text-indigo-800 text-sm font-semibold p-3 rounded-lg mb-4 text-center"></div><ul class="divide-y"><template x-for="item in cart" :key="item.id"><li class="flex py-4 space-x-4"><img :src="item.image" class="w-20 h-20 object-cover rounded-md"><div class="flex-1"><h4 class="font-semibold" x-text="item.name"></h4><p class="text-sm text-gray-500" x-text="item.type === 'subscribe' ?
-        `Subscription` : 'One-time Purchase'"></p><p class="text-sm font-semibold" x-text="`$${item.price.toFixed(2)}`"></p><p x-show="item.type === 'subscribe'" class="text-xs text-green-600 font-semibold">Saving 15%</p><div class="mt-2 flex items-center justify-between"><div class="flex items-center border rounded"><button @click="updateQuantity(item.id, item.quantity - 1)" class="px-2 py-1">-</button><span class="px-3" x-text="item.quantity"></span><button @click="updateQuantity(item.id, item.quantity + 1)" class="px-2 py-1">+</button></div><button @click="removeFromCart(item.id)" class="text-xs text-red-500 hover:underline">Remove</button></div></div></li></template></ul><div x-show="cartRecommendation" class="mt-6 pt-6 border-t"><div class="p-3 rounded-lg bg-gradient-to-r from-gray-50 to-indigo-50"><h4 class="font-semibold text-center text-gray-800 mb-2" x-text="cartRecommendation.title"></h4><div class="flex items-center space-x-3"><img :src="cartRecommendation.image" class="w-16 h-16 object-cover rounded-md"><div class="flex-1"><p class="text-sm font-semibold" x-text="cartRecommendation.name"></p><p class="text-xs text-gray-600" x-text="cartRecommendation.reason"></p></div><button @click="handleRecommendationClick(cartRecommendation)" class="bg-indigo-600 text-white font-bold text-xs py-2 px-3 rounded-full hover:bg-indigo-700 transition" x-text="cartRecommendation.cta"></button></div></div></div></div><div class="p-4 border-t" x-show="cart.length > 0"><div class="p-4 border-b -mx-4 -mt-4"><p class="text-sm text-center mb-1" x-text="shippingMessage"></p><div class="w-full bg-gray-200 rounded-full h-2.5"><div class="bg-amber-400 h-2.5 rounded-full" 
-        :style="`width: ${shippingProgress}%`"></div></div></div><div x-show="totalAnnualSavings > 0" class="my-3 bg-green-50 text-green-800 text-center p-2 rounded-lg text-sm font-semibold" x-html="`You're saving an estimated <strong>$${totalAnnualSavings.toFixed(0)}</strong> per year by subscribing!`"></div><div class="flex justify-between font-semibold"><span>Subtotal</span><span x-text="`$${subtotal}`"></span></div><p class="text-xs text-gray-500 mt-1">Shipping & taxes calculated at checkout.</p><button class="w-full mt-4 bg-gray-800 text-white font-bold py-3 rounded-lg hover:bg-black transition">Proceed to Checkout</button></div></div></div></div>
+    <div x-show="isCartOpen" @click.away="isCartOpen = false" class="fixed inset-0 bg-black bg-opacity-50 z-50" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"><div class="fixed top-0 right-0 h-full w-full max-w-sm bg-white shadow-xl flex flex-col" @click.stop x-show="isCartOpen" x-transition:enter="transition ease-in-out duration-300 transform" x-transition:enter-start="translate-x-full" x-transition:enter-end="translate-x-0" x-transition:leave="transition ease-in-out duration-300 transform" x-transition:leave-start="translate-x-0" x-transition:leave-end="translate-x-full"><div class="flex-grow flex flex-col"><div class="flex justify-between items-center p-4 border-b"><h3 class="text-lg font-semibold">Your Cart</h3><button @click="isCartOpen = false" class="text-sm text-indigo-600 hover:underline">← Continue Shopping</button></div><div class="flex-grow overflow-y-auto p-4"><template x-if="cart.length === 0"><div class="text-center pt-10"><p class="text-gray-500 mb-4">Your cart is empty.</p><button @click="selectedProductId = '1'; isCartOpen = false" class="text-indigo-600 font-semibold hover:underline">Shop Bestseller →</button></div></template><div x-show="cartMessage" x-text="cartMessage" class="bg-indigo-50 text-indigo-800 text-sm font-semibold p-3 rounded-lg mb-4 text-center"></div><ul class="divide-y"><template x-for="item in cart" :key="item.id"><li class="flex py-4 space-x-4"><img :src="item.image" class="w-20 h-20 object-cover rounded-md"><div class="flex-1"><h4 class="font-semibold" x-text="item.name"></h4><p class="text-sm text-gray-500" x-text="item.type === 'subscribe' ? `Subscription` : 'One-time Purchase'"></p><p class="text-sm font-semibold" x-text="`$${item.price.toFixed(2)}`"></p><p x-show="item.type === 'subscribe'" class="text-xs text-green-600 font-semibold">Saving 15%</p><div class="mt-2 flex items-center justify-between"><div class="flex items-center border rounded"><button @click="updateQuantity(item.id, item.quantity - 1)" class="px-2 py-1">-</button><span class="px-3" x-text="item.quantity"></span><button @click="updateQuantity(item.id, item.quantity + 1)" class="px-2 py-1">+</button></div><button @click="removeFromCart(item.id)" class="text-xs text-red-500 hover:underline">Remove</button></div></div></li></template></ul><div x-show="cartRecommendation" class="mt-6 pt-6 border-t"><div class="p-3 rounded-lg bg-gradient-to-r from-gray-50 to-indigo-50"><h4 class="font-semibold text-center text-gray-800 mb-2" x-text="cartRecommendation.title"></h4><div class="flex items-center space-x-3"><img :src="cartRecommendation.image" class="w-16 h-16 object-cover rounded-md"><div class="flex-1"><p class="text-sm font-semibold" x-text="cartRecommendation.name"></p><p class="text-xs text-gray-600" x-text="cartRecommendation.reason"></p></div><button @click="handleRecommendationClick(cartRecommendation)" class="bg-indigo-600 text-white font-bold text-xs py-2 px-3 rounded-full hover:bg-indigo-700 transition" x-text="cartRecommendation.cta"></button></div></div></div></div><div class="p-4 border-t" x-show="cart.length > 0"><div class="p-4 border-b -mx-4 -mt-4"><p class="text-sm text-center mb-1" x-text="shippingMessage"></p><div class="w-full bg-gray-200 rounded-full h-2.5"><div class="bg-amber-400 h-2.5 rounded-full" :style="`width: ${shippingProgress}%`"></div></div></div><div x-show="totalAnnualSavings > 0" class="my-3 bg-green-50 text-green-800 text-center p-2 rounded-lg text-sm font-semibold" x-html="`You're saving an estimated <strong>$${totalAnnualSavings.toFixed(0)}</strong> per year by subscribing!`"></div><div class="flex justify-between font-semibold"><span>Subtotal</span><span x-text="`$${subtotal}`"></span></div><p class="text-xs text-gray-500 mt-1">Shipping & taxes calculated at checkout.</p><button class="w-full mt-4 bg-gray-800 text-white font-bold py-3 rounded-lg hover:bg-black transition">Proceed to Checkout</button></div></div></div></div>
 
 <script>
-// NOTE: You must ensure '@shopify/graphql-client' or an equivalent is available in your browser environment.
-// For a simple static page, you may need a UMD/CDN version or use a tool like import maps.
-// For demonstration, we assume 'createStorefrontClient' is globally available.
-const createStorefrontClient = window.createStorefrontClient || (() => ({
-    request: () => Promise.resolve({ data: { cartCreate: { cart: { webUrl: 'https://shopmamasol.com/checkout' }, userErrors: [] } } }) 
-}));
-
-
 function productPage() {
-    const SHOPIFY_DOMAIN = 'https://www.shopmamasol.com/'; 
-    const STOREFRONT_ACCESS_TOKEN = 'f0ef66127d21636b5058b4af3df3e4e2'; 
-    const API_VERSION = '2024-07';
-
-    const client = createStorefrontClient({
-        storeDomain: SHOPIFY_DOMAIN,
-        apiVersion: API_VERSION,
-        publicAccessToken: STOREFRONT_ACCESS_TOKEN,
-    });
-    
-    // --- GraphQL Cart Creation Mutation ---
-    const cartCreateMutation = `
-        mutation cartCreate($input: CartInput) {
-            cartCreate(input: $input) {
-                cart { webUrl }
-                userErrors { field message }
-            }
-        }
-    `;
-
     return {
-        // NOTE: The 'cart' array and related local cart logic (cartCount, subtotal, etc.) 
-        // will now only reflect additions if you modify the API functions to update it 
-        // after a successful redirect, or if you use the cart for another purpose.
         cart: [], isCartOpen: false, selectedProductId: '1', purchaseType: 'subscribe', justAdded: false, cartMessage: '', showSuccessToast: false, showDesktopSticky: false,
-
         products: {
-            '1': { 
-                id: 1, 
-                name: 'BODYBRELLA™ Hydrating Milk SPF 40', 
-                tagline: "For silky, hydrated all-over protection.", 
-                price: 44.00, 
-                badge: 'INSTANT & INVISIBLE', 
-                isBestseller: true, 
-                // *** UPDATED SHOPIFY VARIANT GIDs ***
-                oneTimeVariantId: 'gid://shopify/ProductVariant/48438413689125', 
-                subscribeVariantId: 'gid://shopify/ProductVariant/48438413689125', // Assuming same variant for now. Adjust if subscription uses a different GID/Selling Plan.
-                // ***********************************
-                award: { name: 'Shape', winner: 'Best Body SPF', logo: 'https://upload.wikimedia.org/wikipedia/commons/2/27/SHAPE_Logo.svg' }, 
-                testimonial: { text: "This smells amazing and leaves no white cast. Best sunscreen on the market!", author: "Erika P., Verified Buyer" }, 
+            '1': { id: 1, name: 'BODYBRELLA™ Hydrating Milk SPF 40', tagline: "For silky, hydrated all-over protection.", price: 44.00, badge: 'INSTANT & INVISIBLE', isBestseller: true, award: { name: 'Shape', winner: 'Best Body SPF', logo: 'https://upload.wikimedia.org/wikipedia/commons/2/27/SHAPE_Logo.svg' }, testimonial: { text: "This smells amazing and leaves no white cast. Best sunscreen on the market!", author: "Erika P., Verified Buyer" }, 
                 images: { 
                     main: 'https://cdn.shopify.com/s/files/1/0721/7623/8885/files/body-ppc.png?v=1761660397', 
                     thumbnails: [
@@ -197,18 +119,7 @@ function productPage() {
                     ] 
                 },
             },
-            '2': { 
-                id: 2, 
-                name: 'LIPBRELLA™ Tinted Lip Oil SPF 20', 
-                tagline: "A hint of tint with powerful mineral SPF.", 
-                price: 34.00, 
-                badge: 'HYDRATING TINT', 
-                // *** UPDATED SHOPIFY VARIANT GIDs ***
-                oneTimeVariantId: 'gid://shopify/ProductVariant/48438405366053',
-                subscribeVariantId: 'gid://shopify/ProductVariant/48438405366053', // Assuming same variant
-                // ***********************************
-                award: { name: 'NewBeauty', winner: 'Best Lip Gloss with SPF', logo: 'https://prnewswire2-a.akamaihd.net/p/1893751/sp/189375100/thumbnail/entry_id/0_41ac0hhh/def_height/2700/def_width/2700/version/100012/type/1' }, 
-                testimonial: { text: "I am an esthetician with over 20 years experience... It’s hard to find a mineral lip spf, and this one is the best by far.", author: "Lylla D., Esthetician" }, 
+            '2': { id: 2, name: 'LIPBRELLA™ Tinted Lip Oil SPF 20', tagline: "A hint of tint with powerful mineral SPF.", price: 34.00, badge: 'HYDRATING TINT', award: { name: 'NewBeauty', winner: 'Best Lip Gloss with SPF', logo: 'https://prnewswire2-a.akamaihd.net/p/1893751/sp/189375100/thumbnail/entry_id/0_41ac0hhh/def_height/2700/def_width/2700/version/100012/type/1' }, testimonial: { text: "I am an esthetician with over 20 years experience... It’s hard to find a mineral lip spf, and this one is the best by far.", author: "Lylla D., Esthetician" }, 
                 images: { 
                     main: 'https://cdn.shopify.com/s/files/1/0721/7623/8885/files/lip-ppc.png?v=1761660363', 
                     thumbnails: [
@@ -228,20 +139,9 @@ function productPage() {
                         'https://www.shopmamasol.com/cdn/shop/files/Product-Swatch-Rise.png?v=1755603183&width=1000',
                         'https://www.shopmamasol.com/cdn/shop/files/Product-Swatch-Shine.png?v=1755603183&width=1000'
                     ] 
-              },
+                },
             },
-            '3': { 
-                id: 3, 
-                name: 'FACEBRELLA™ Moisturizer SPF 30', 
-                tagline: "Lightweight fluid perfect under makeup.", 
-                price: 48.00, 
-                badge: 'FEELS LIKE NOTHING', 
-                // *** UPDATED SHOPIFY VARIANT GIDs ***
-                oneTimeVariantId: 'gid://shopify/ProductVariant/44789635023141',
-                subscribeVariantId: 'gid://shopify/ProductVariant/44789635023141', // Assuming same variant
-                // ***********************************
-                award: { name: "Harper's Bazaar", winner: "Best Mineral Sunscreen", logo: 'https://upload.wikimedia.org/wikipedia/commons/b/b1/Harper%27s_Bazaar_Logo.svg' }, 
-                testimonial: { text: "This product has converted me into a daily sunscreen user. I love how it feels and how dewy it makes my skin.", author: "Tessa K., Verified Buyer" }, 
+            '3': { id: 3, name: 'FACEBRELLA™ Moisturizer SPF 30', tagline: "Lightweight fluid perfect under makeup.", price: 48.00, badge: 'FEELS LIKE NOTHING', award: { name: "Harper's Bazaar", winner: "Best Mineral Sunscreen", logo: 'https://upload.wikimedia.org/wikipedia/commons/b/b1/Harper%27s_Bazaar_Logo.svg' }, testimonial: { text: "This product has converted me into a daily sunscreen user. I love how it feels and how dewy it makes my skin.", author: "Tessa K., Verified Buyer" }, 
                 images: { 
                     main: 'https://cdn.shopify.com/s/files/1/0721/7623/8885/files/face-ppc.png?v=1761660381', 
                     thumbnails: [
@@ -254,165 +154,25 @@ function productPage() {
                     ] 
                 },
             },
-            '5': { 
-                id: 5, 
-                name: 'The Face & Body Duo', 
-                price: 82.00, 
-                type: 'bundle', 
-                components: [1, 3], 
-                // *** UPDATED SHOPIFY VARIANT GIDs ***
-                bundleVariantId: 'gid://shopify/ProductVariant/49278006001957',
-                // ***********************************
-                images: { main: 'https://www.shopmamasol.com/cdn/shop/files/TheFaceandBodyDuo.png?v=1721757674' } 
-            },
-            '7': { 
-                id: 7, 
-                name: 'The Complete Set', 
-                price: 112.00, 
-                type: 'bundle', 
-                components: [1, 3, 2], 
-                // *** UPDATED SHOPIFY VARIANT GIDs ***
-                bundleVariantId: 'gid://shopify/ProductVariant/49278045651237',
-                // ***********************************
-                images: { main: 'httpsT://www.shopmamasol.com/cdn/shop/files/TheCompleteFaceBodyandLipSet.png?v=1721757668' } 
-            }
+            '5': { id: 5, name: 'The Face & Body Duo', price: 82.00, type: 'bundle', components: [1, 3], images: { main: 'https://www.shopmamasol.com/cdn/shop/files/TheFaceandBodyDuo.png?v=1721757674' } },
+            '7': { id: 7, name: 'The Complete Set', price: 112.00, type: 'bundle', components: [1, 3, 2], images: { main: 'httpsT://www.shopmamasol.com/cdn/shop/files/TheCompleteFaceBodyandLipSet.png?v=1721757668' } }
         },
         shippingThreshold: 70, 
-        
-        // --- API Integration Functions ---
-
-        /**
-         * Core function to create a new Shopify Cart and get the checkout URL.
-         * This function completely replaces the old local cart addition.
-         * @param {Array<Object>} lines - Array of line items: [{ quantity: 1, merchandiseId: 'gid://...' }]
-         */
-        async handleCartOperation(lines) {
-            this.triggerSuccess("Processing order...");
-            
-            // Check if client is initialized
-            if (!client || typeof client.request !== 'function') {
-                console.error("Shopify Client not initialized correctly. Cannot proceed.");
-                alert("Shopify connection error. Check console and configuration.");
-                return null;
-            }
-
-            const variables = { 
-                input: { 
-                    lines: lines 
-                } 
-            };
-
-            try {
-                const response = await client.request(cartCreateMutation, { variables });
-                const cartCreate = response.data.cartCreate;
-
-                if (cartCreate.userErrors && cartCreate.userErrors.length > 0) {
-                    console.error('Shopify API Error:', cartCreate.userErrors);
-                    alert(`Error: ${cartCreate.userErrors.map(e => e.message).join(', ')}`);
-                    return null;
-                }
-                
-                return cartCreate.cart.webUrl;
-
-            } catch (e) {
-                console.error('An unexpected error occurred during API call:', e);
-                alert('A critical error occurred. Please try again.');
-                return null;
-            }
-        },
-
-        /**
-         * Primary function for single product purchase (one-time or subscription)
-         */
-        async addToCart() { 
-            const item = this.selectedProduct;
-            let variantId;
-            // NOTE: Simplification - real subscription might require a sellingPlanId and the standard variant GID.
-            variantId = this.purchaseType === 'subscribe' ? item.subscribeVariantId : item.oneTimeVariantId;
-
-            if (!variantId) {
-                console.error("No valid variant ID found for the selected purchase option.");
-                alert("Configuration error: Product ID missing.");
-                return;
-            }
-
-            const lines = [{
-                quantity: 1,
-                merchandiseId: variantId,
-                // Add sellingPlanId here if needed for subscriptions
-            }];
-            
-            const checkoutUrl = await this.handleCartOperation(lines);
-
-            if (checkoutUrl) {
-                window.location.href = checkoutUrl;
-            }
-        },
-
-        /**
-         * Function for bundle purchases (The Duo or The Set)
-         * @param {string} bundleId - The internal numeric ID of the bundle ('5' or '7')
-         */
-        async addBundleToCart(bundleId) { 
-            const bundle = this.products[bundleId];
-            const variantId = bundle.bundleVariantId;
-
-            if (!variantId) {
-                console.error(`No valid bundle variant ID found for bundle ${bundleId}.`);
-                alert("Configuration error: Bundle ID missing.");
-                return;
-            }
-
-            const lines = [{
-                quantity: 1,
-                merchandiseId: variantId,
-            }];
-
-            const checkoutUrl = await this.handleCartOperation(lines);
-
-            if (checkoutUrl) {
-                window.location.href = checkoutUrl;
-            }
-        },
-
-        // --- Original Alpine.js Functions (mostly for UI/local cart which is now optional) ---
-        init() { this.$watch('selectedProductId', (newVal, oldVal) => { if(newVal !== oldVal) this.purchaseType = 'subscribe' });
-        const ctaSection = document.querySelector('#main-cta-section'); if(ctaSection) { const observer = new IntersectionObserver((entries) => { this.showDesktopSticky = !entries[0].isIntersecting; }, { threshold: 0 });
-        observer.observe(ctaSection); } },
-        get selectedProduct() { return this.products[this.selectedProductId];
-        },
-        get currentPrice() { return this.purchaseType === 'subscribe' ?
-        this.selectedProduct.price * 0.85 : this.selectedProduct.price; },
-        get cartCount() { return this.cart.reduce((total, item) => total + item.quantity, 0);
-        },
-        get subtotal() { return this.cart.reduce((total, item) => total + (item.price * item.quantity), 0).toFixed(2);
-        },
-        get shippingProgress() { return Math.min((this.subtotal / this.shippingThreshold) * 100, 100);
-        },
-        get shippingMessage() { const amountLeft = this.shippingThreshold - this.subtotal;
-        return amountLeft <= 0 ? "🎉 You've unlocked free shipping!" : `You're $${amountLeft.toFixed(2)} away from free shipping.`;
-        },
-        get totalAnnualSavings() { return this.cart.reduce((total, item) => { if (item.type === 'subscribe') { const originalPrice = this.products[item.productId].price; const savingsPerBottle = originalPrice - item.price; const annualSavings = savingsPerBottle * 6 * item.quantity; return total + annualSavings; } return total; }, 0);
-        },
-        get cartRecommendation() { const hasProduct = (id) => this.cart.some(item => item.productId === id);
-        const hasBundle = () => this.cart.some(item => this.products[item.productId].type === 'bundle'); if (hasBundle() || this.cart.length === 0) return null;
-        const hasFace = hasProduct(3); const hasBody = hasProduct(1); const hasLip = hasProduct(2);
-        if (hasFace && hasBody) { return { type: 'bundle', id: 7, title: "You're so close!", reason: "Upgrade to the Complete Set & save more.", cta: "Upgrade", name: this.products[7].name, image: this.products[2].images.thumbnails[0] };
-        } if (hasFace && !hasBody) { return { type: 'product', id: 1, title: "Don't forget your body!", reason: "Get head-to-toe protection.", cta: "Add Body", name: this.products[1].name, image: this.products[1].images.thumbnails[0] };
-        } if (hasBody && !hasFace) { return { type: 'product', id: 3, title: "Your face will thank you", reason: "Our daily fluid is perfect under makeup.", cta: "Add Face", name: this.products[3].name, image: this.products[3].images.thumbnails[0] };
-        } if ((hasFace || hasBody) && !hasLip) { return { type: 'product', id: 2, title: "Complete Your Routine", reason: "Don't forget SPF for your lips.", cta: "Add Lip", name: this.products[2].name, image: this.products[2].images.thumbnails[0] };
-        } if (hasLip && !hasBody && !hasFace) { return { type: 'product', id: 1, title: "Customers also love...", reason: "Our bestselling Body formula.", cta: "Add Body", name: this.products[1].name, image: this.products[1].images.thumbnails[0] };
-        } return null; },
-        // NOTE: The following local cart functions are now UI-only and need to be wired to the API if you want them fully functional.
-        // For the PPC goal (instant redirect), they are mostly irrelevant.
-        triggerSuccess(message) { this.cartMessage = message; this.isCartOpen = true; this.justAdded = true;
-        this.showSuccessToast = true; setTimeout(() => this.justAdded = false, 2000); setTimeout(() => this.showSuccessToast = false, 3000);
-        },
-        removeFromCart(id) { this.cart = this.cart.filter(item => item.id !== id);
-        if(this.cart.length === 0) this.cartMessage = ''; },
-        updateQuantity(id, newQuantity) { const item = this.cart.find(i => i.id === id);
-        if (item && newQuantity > 0) item.quantity = newQuantity; else if (item && newQuantity <= 0) this.removeFromCart(id);
-        }
+        init() { this.$watch('selectedProductId', (newVal, oldVal) => { if(newVal !== oldVal) this.purchaseType = 'subscribe' }); const ctaSection = document.querySelector('#main-cta-section'); if(ctaSection) { const observer = new IntersectionObserver((entries) => { this.showDesktopSticky = !entries[0].isIntersecting; }, { threshold: 0 }); observer.observe(ctaSection); } },
+        get selectedProduct() { return this.products[this.selectedProductId]; },
+        get currentPrice() { return this.purchaseType === 'subscribe' ? this.selectedProduct.price * 0.85 : this.selectedProduct.price; },
+        get cartCount() { return this.cart.reduce((total, item) => total + item.quantity, 0); },
+        get subtotal() { return this.cart.reduce((total, item) => total + (item.price * item.quantity), 0).toFixed(2); },
+        get shippingProgress() { return Math.min((this.subtotal / this.shippingThreshold) * 100, 100); },
+        get shippingMessage() { const amountLeft = this.shippingThreshold - this.subtotal; return amountLeft <= 0 ? "🎉 You've unlocked free shipping!" : `You're $${amountLeft.toFixed(2)} away from free shipping.`; },
+        get totalAnnualSavings() { return this.cart.reduce((total, item) => { if (item.type === 'subscribe') { const originalPrice = this.products[item.productId].price; const savingsPerBottle = originalPrice - item.price; const annualSavings = savingsPerBottle * 6 * item.quantity; return total + annualSavings; } return total; }, 0); },
+        get cartRecommendation() { const hasProduct = (id) => this.cart.some(item => item.productId === id); const hasBundle = () => this.cart.some(item => this.products[item.productId].type === 'bundle'); if (hasBundle() || this.cart.length === 0) return null; const hasFace = hasProduct(3); const hasBody = hasProduct(1); const hasLip = hasProduct(2); if (hasFace && hasBody) { return { type: 'bundle', id: 7, title: "You're so close!", reason: "Upgrade to the Complete Set & save more.", cta: "Upgrade", name: this.products[7].name, image: this.products[2].images.thumbnails[0] }; } if (hasFace && !hasBody) { return { type: 'product', id: 1, title: "Don't forget your body!", reason: "Get head-to-toe protection.", cta: "Add Body", name: this.products[1].name, image: this.products[1].images.thumbnails[0] }; } if (hasBody && !hasFace) { return { type: 'product', id: 3, title: "Your face will thank you", reason: "Our daily fluid is perfect under makeup.", cta: "Add Face", name: this.products[3].name, image: this.products[3].images.thumbnails[0] }; } if ((hasFace || hasBody) && !hasLip) { return { type: 'product', id: 2, title: "Complete Your Routine", reason: "Don't forget SPF for your lips.", cta: "Add Lip", name: this.products[2].name, image: this.products[2].images.thumbnails[0] }; } if (hasLip && !hasBody && !hasFace) { return { type: 'product', id: 1, title: "Customers also love...", reason: "Our bestselling Body formula.", cta: "Add Body", name: this.products[1].name, image: this.products[1].images.thumbnails[0] }; } return null; },
+        addToCart() { const item = this.selectedProduct; const price = this.currentPrice; const type = this.purchaseType; const id = `${item.id}-${type}`; const existingItem = this.cart.find(i => i.id === id); if (existingItem) { existingItem.quantity++; } else { this.cart.push({ id, productId: item.id, name: item.name, price, quantity: 1, type, image: item.images.thumbnails[0] }); } this.triggerSuccess("Smart choice! This has been added to your cart."); },
+        addBundleToCart(bundleId) { const bundle = this.products[bundleId]; const id = `${bundle.id}-one-time`; const existingItem = this.cart.find(i => i.id === id); if (existingItem) { existingItem.quantity++; } else { this.cart.push({ id, productId: bundle.id, name: bundle.name, price: bundle.price, quantity: 1, type: 'one-time', image: bundle.images.main }); } this.triggerSuccess("Excellent value! This has been added to your cart."); },
+        handleRecommendationClick(rec) { if (rec.type === 'product') { const id = `${rec.id}-one-time`; if (!this.cart.some(i => i.id === id)) { this.cart.push({ id: id, productId: rec.id, name: this.products[rec.id].name, price: this.products[rec.id].price, quantity: 1, type: 'one-time', image: this.products[rec.id].images.thumbnails[0] }); this.cartMessage = "Great addition! Your routine is looking complete."; } } else if (rec.type === 'bundle') { const bundle = this.products[rec.id]; this.cart = this.cart.filter(item => !bundle.components.includes(item.productId)); this.addBundleToCart(rec.id); this.cartMessage = "Smart upgrade! You're saving with the Complete Set."; } },
+        triggerSuccess(message) { this.cartMessage = message; this.isCartOpen = true; this.justAdded = true; this.showSuccessToast = true; setTimeout(() => this.justAdded = false, 2000); setTimeout(() => this.showSuccessToast = false, 3000); },
+        removeFromCart(id) { this.cart = this.cart.filter(item => item.id !== id); if(this.cart.length === 0) this.cartMessage = ''; },
+        updateQuantity(id, newQuantity) { const item = this.cart.find(i => i.id === id); if (item && newQuantity > 0) item.quantity = newQuantity; else if (item && newQuantity <= 0) this.removeFromCart(id); }
     }
 }
 </script>
