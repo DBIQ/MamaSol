@@ -86,9 +86,9 @@
                                 <template x-if="media.type === 'image'">
                                     <img :src="media.url" alt="Product image" class="w-full h-full object-cover rounded-lg">
                                 </template>
-                                <!-- <template x-if="media.type === 'video'">
+                                <template x-if="media.type === 'video'">
                                     <video :src="media.url" class="w-full h-full object-cover rounded-lg" autoplay muted loop playsinline controls></video>
-                                </template> -->
+                                </template>
                             </div>
                         </template>
                         <span class="absolute top-4 left-4 bg-indigo-600 text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider" x-text="selectedProduct.badge"></span>
@@ -119,9 +119,9 @@
                     <template x-if="selectedProduct.images.main.type === 'image'">
                         <img :src="selectedProduct.images.main.url" alt="Main product image" class="w-full h-auto object-cover rounded-lg shadow-md transition-opacity duration-300" :key="selectedProduct.images.main.url">
                     </template>
-                    <!-- <template x-if="selectedProduct.images.main.type === 'video'">
+                    <template x-if="selectedProduct.images.main.type === 'video'">
                         <video :src="selectedProduct.images.main.url" class="w-full h-auto object-cover rounded-lg shadow-md transition-opacity duration-300" :key="selectedProduct.images.main.url" controls autoplay muted playsinline loop></video>
-                    </template> -->
+                    </template>
                     <span class="absolute top-4 left-4 bg-indigo-600 text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider" x-text="selectedProduct.badge"></span>
                 </div>
                 <div class="hidden sm:flex space-x-2 flex-wrap"><template x-for="thumb in selectedProduct.images.thumbnails"><button @click="selectedProduct.images.main = thumb" :class="{'ring-2 ring-indigo-500': selectedProduct.images.main.url === thumb.url}" class="w-20 h-20 rounded-md overflow-hidden transition mb-2"><template x-if="thumb.type === 'image'"><img :src="thumb.url" class="w-full h-full object-cover"></template><template x-if="thumb.type === 'video'"><div class="relative w-full h-full"><img :src="thumb.thumb" class="w-full h-full object-cover opacity-75"><svg class="absolute inset-0 m-auto w-8 h-8 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M6 3L18 12L6 21V3Z"/></svg></div></template></button></template></div>
@@ -244,9 +244,9 @@
 function productPage() {
     // UPDATED: Mapping individual video links to product IDs
     const individualVideoLinks = {
-        '1': 'https://cdn.shopify.com/videos/c/o/v/e185c7b59ce94062ac484a26f1f8a165.mov', // FACEBRELLA
-        '2': 'https://cdn.shopify.com/videos/c/o/v/b6a2326072434add8151b910360aba05.mov', // BODYBRELLA
-        '3': 'https://cdn.shopify.com/videos/c/o/v/73fdc8e73ea74a8c8ca8439bd7efe446.mov'  // LIPBRELLA
+        '1': 'https://cdn.shopify.com/videos/c/o/v/28fd141342474f46a175d143e10ba52e.mov', // FACEBRELLA
+        '2': 'https://cdn.shopify.com/videos/c/o/v/6b6acd2a88374ae2a39c97a6b129baa2.mov', // BODYBRELLA
+        '3': 'https://cdn.shopify.com/videos/c/o/v/a5cd19ff91a54e4ba97ce41e197de742.mov'  // LIPBRELLA
     };
 
     // Helper to format an image URL into the desired media object
@@ -261,21 +261,21 @@ function productPage() {
         let thumbnailMedia = thumbnails.map(url => imageMedia(url));
 
         // Create the specific video media object for this product
-        // const specificVideoLink = individualVideoLinks[productId];
-        // const specificVideoMedia = { 
-        //     url: specificVideoLink, 
-        //     type: 'video', 
-        //     // Using a specific placeholder image for the video thumbnail
-        //     thumb: 'https://cdn.shopify.com/s/files/1/0721/7623/8885/files/video-placeholder.png?v=1680828495'
-        // };
+        const specificVideoLink = individualVideoLinks[productId];
+        const specificVideoMedia = { 
+            url: specificVideoLink, 
+            type: 'video', 
+            // Using a specific placeholder image for the video thumbnail
+            thumb: 'https://cdn.shopify.com/videos/c/o/v/0e49423f89064d21b5be91239e67f01c.mov'
+        };
 
-        // // Insert the specific video after the second image (index 2 for the 3rd thumbnail)
-        // const videoIndex = 2; 
-        // if (thumbnailMedia.length >= videoIndex) {
-        //      thumbnailMedia.splice(videoIndex, 0, specificVideoMedia);
-        // } else {
-        //      thumbnailMedia.push(specificVideoMedia);
-        // }
+        // Insert the specific video after the second image (index 2 for the 3rd thumbnail)
+        const videoIndex = 2; 
+        if (thumbnailMedia.length >= videoIndex) {
+             thumbnailMedia.splice(videoIndex, 0, specificVideoMedia);
+        } else {
+             thumbnailMedia.push(specificVideoMedia);
+        }
 
         // Combine main and thumbnails for the mobile carousel (ensure no duplicates)
         // Ensure the MAIN image is the first one in the 'all' array for initial display
