@@ -12,7 +12,7 @@
         font-face {
             font-family: 'Campton Book';
             /* The path starts at the root of your site (where index.html is) */
-            src: url('/fonts/CamptonBook.woff') format('woff'); 
+            src: url('./fonts/CamptonBook.woff') format('woff'); 
             font-weight: 400; 
             font-style: normal;
             font-display: swap; 
@@ -21,7 +21,7 @@
         font-face {
             font-family: 'Moneta';
             /* The path starts at the root of your site (where index.html is) */
-            src: url('/fonts/Moneta-Regular.woff2') format('woff'); 
+            src: url('./fonts/Moneta-Regular.woff2') format('woff'); 
             font-weight: 400; 
             font-style: normal;
             font-display: swap; 
@@ -46,7 +46,7 @@
         .carousel-item:not(.active) { opacity: 0; position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 
         h1, h2, h3, h4, h5 {
-             font-family: 'Moneta';
+             font-family: 'Moneta', sans-serif;
         }
     </style>
 </head>
@@ -75,7 +75,7 @@
         
         <div id="main-cta-section-mobile" class="md:hidden">
             <div class="flex items-center space-x-4 mb-2"><div class="flex -space-x-4"><img class="w-14 h-14 rounded-full border-2 border-white object-cover" src="https://www.shopmamasol.com/cdn/shop/files/upscaled-4x-Arielle.png?v=1747876194" alt="Arielle Moody"><img class="w-14 h-14 rounded-full border-2 border-white object-cover" src="https://www.shopmamasol.com/cdn/shop/files/upscaled-4x-Thalia.png?v=1747875979" alt="Tahlia Disisto"><img class="w-14 h-14 rounded-full border-2 border-white object-cover" src="https://cdn.shopify.com/s/files/1/0721/7623/8885/files/sheri_adapated.png?v=1762786329" alt="Dr. Sheri Rowen"></div><p class="text-sm text-gray-600 italic">Created by moms, for moms, with a leading doctor's expertise.</p></div>
-            <h2 class="text-3xl font-extrabold text-gray-900 leading-tight">Immediate Sun Protection</h2>
+            <h2 class="text-3xl font-extrabold text-gray-900 leading-tight">Immediate Sun Protehhhction</h2>
             <p class="mt-1 text-lg text-gray-700">Because you don't have time to wait.</p>
             
             <div class="my-4">
@@ -87,7 +87,7 @@
                                     <img :src="media.url" alt="Product image" class="w-full h-full object-cover rounded-lg">
                                 </template>
                                 <template x-if="media.type === 'video'">
-                                    <video :src="media.url" class="w-full h-full object-cover rounded-lg" autoplay muted loop playsinline controls></video>
+                                    <video :src="media.url" class="w-full h-full object-cover rounded-lg" autoplay loop controls></video>
                                 </template>
                             </div>
                         </template>
@@ -129,6 +129,7 @@
             <div>
                 <div class="flex items-center space-x-4 mb-2"><div class="flex -space-x-4"><img class="w-14 h-14 rounded-full border-2 border-white object-cover" src="https://www.shopmamasol.com/cdn/shop/files/upscaled-4x-Arielle.png?v=1747876194" alt="Arielle Moody"><img class="w-14 h-14 rounded-full border-2 border-white object-cover" src="https://www.shopmamasol.com/cdn/shop/files/upscaled-4x-Thalia.png?v=1747875979" alt="Tahlia Disisto"><img class="w-14 h-14 rounded-full border-2 border-white object-cover" src="https://cdn.shopify.com/s/files/1/0721/7623/8885/files/sheri_adapated.png?v=1762786329" alt="Dr. Sheri Rowen"></div><p class="text-sm text-gray-600 italic">Created by moms, for moms, with a leading doctor's expertise.</p></div>
                 <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 leading-tight">Immediate Sun Protection</h2>
+
                 <p class="mt-1 text-lg text-gray-700">Because you don't have time to wait.</p>
                 <div class="mt-3" x-show="selectedProduct.award"><div class="bg-gray-100 p-2 rounded-lg inline-flex items-center"><img :src="selectedProduct.award.logo" :alt="selectedProduct.award.name" class="h-6 mr-2"><span class="font-bold text-xs text-gray-800" x-text="selectedProduct.award.winner"></span></div></div>
                 <div class="mt-4 space-y-3"><template x-for="productId in ['1', '3', '2']"><div :key="productId" class="relative"><input type="radio" :id="`desktop-choice-${productId}`" :value="productId" x-model="selectedProductId" class="sr-only product-choice-radio" name="product-selection"><label :for="`desktop-choice-${productId}`" class="flex items-center p-3 border-2 rounded-lg cursor-pointer transition" :class="{'border-indigo-600 shadow-[0_0_0_2px_#4f46e5] bg-blue-50': selectedProductId === productId}"><img :src="products[productId].images.thumbnails[0].url" class="w-12 h-12 rounded-md object-cover mr-3"><div class="flex-1"><span class="font-semibold text-gray-900" x-text="products[productId].name"></span><p class="text-sm text-gray-600" x-text="products[productId].tagline"></p></div><span class="font-bold text-lg text-gray-900" x-text="`$${products[productId].price.toFixed(2)}`"></span></label><span x-show="products[productId].isBestseller" class="absolute -top-2.5 left-4 bg-amber-400 text-black text-xs font-bold px-2 py-0.5 rounded-full">BESTSELLER</span></div></template></div>
@@ -266,7 +267,7 @@ function productPage() {
             url: specificVideoLink, 
             type: 'video', 
             // Using a specific placeholder image for the video thumbnail
-            thumb: 'https://cdn.shopify.com/videos/c/o/v/0e49423f89064d21b5be91239e67f01c.mov'
+            // thumb: 'https://cdn.shopify.com/videos/c/o/v/0e49423f89064d21b5be91239e67f01c.mov'
         };
 
         // Insert the specific video after the second image (index 2 for the 3rd thumbnail)
