@@ -87,7 +87,7 @@
                                     <img :src="media.url" alt="Product image" class="w-full h-full object-cover rounded-lg">
                                 </template>
                                 <template x-if="media.type === 'video'">
-                                    <video :src="media.url" class="w-full h-full object-cover rounded-lg" autoplay loop controls></video>
+                                    <video :src="media.url" class="w-full h-full object-cover rounded-lg" autoplay loop controls playsinline muted></video>
                                 </template>
                             </div>
                         </template>
@@ -120,7 +120,7 @@
                         <img :src="selectedProduct.images.main.url" alt="Main product image" class="w-full h-auto object-cover rounded-lg shadow-md transition-opacity duration-300" :key="selectedProduct.images.main.url">
                     </template>
                     <template x-if="selectedProduct.images.main.type === 'video'">
-                        <video :src="selectedProduct.images.main.url" class="w-full h-auto object-cover rounded-lg shadow-md transition-opacity duration-300" :key="selectedProduct.images.main.url" controls autoplay muted playsinline loop></video>
+                        <video :src="selectedProduct.images.main.url" class="w-full h-auto object-cover rounded-lg shadow-md transition-opacity duration-300" :key="selectedProduct.images.main.url" controls autoplay playsinline loop></video>
                     </template>
                     <span class="absolute top-4 left-4 bg-indigo-600 text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider" x-text="selectedProduct.badge"></span>
                 </div>
@@ -307,8 +307,18 @@ function productPage() {
         };
     };
 
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const ref = urlParams.get('ref');
+    const productID = {
+        null: 1,
+        "face": 1,
+        "body": 2,
+        "lip": 3
+    }
+
     return {
-        cart: [], isCartOpen: false, selectedProductId: '1', purchaseType: 'subscribe', justAdded: false, cartMessage: '', showSuccessToast: false, showDesktopSticky: false,
+        cart: [], isCartOpen: false, selectedProductId: productID[ref], purchaseType: 'subscribe', justAdded: false, cartMessage: '', showSuccessToast: false, showDesktopSticky: false,
         mobileCarouselIndex: 0, // NEW: For mobile carousel tracking
         products: {
             '1': { id: 1, name: 'FACEBRELLA™ Moisturizer SPF 30', tagline: "Lightweight fluid perfect under makeup.", price: 48.00, badge: 'FEELS LIKE NOTHING', isBestseller: true, award: { name: "Harper's Bazaar", winner: "Best Mineral Sunscreen", logo: 'https://upload.wikimedia.org/wikipedia/commons/b/b1/Harper%27s_Bazaar_Logo.svg' }, testimonial: { text: "This product has converted me into a daily sunscreen user. I love how it feels and how dewy it makes my skin.", author: "Tessa K., Verified Buyer" }, 
