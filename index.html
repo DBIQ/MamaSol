@@ -311,14 +311,16 @@ function productPage() {
     const urlParams = new URLSearchParams(queryString);
     const ref = urlParams.get('ref');
     const productID = {
-        null: 1,
-        "face": 1,
-        "body": 2,
-        "lip": 3
+        null: "1",
+        "face": "1",
+        "body": "2",
+        "lip": "3"
     }
 
+    const ID = productID[ref] || "1"
+
     return {
-        cart: [], isCartOpen: false, selectedProductId: productID[ref], purchaseType: 'subscribe', justAdded: false, cartMessage: '', showSuccessToast: false, showDesktopSticky: false,
+        cart: [], isCartOpen: false, selectedProductId: ID, purchaseType: 'subscribe', justAdded: false, cartMessage: '', showSuccessToast: false, showDesktopSticky: false,
         mobileCarouselIndex: 0, // NEW: For mobile carousel tracking
         products: {
             '1': { id: 1, name: 'FACEBRELLA™ Moisturizer SPF 30', tagline: "Lightweight fluid perfect under makeup.", price: 48.00, badge: 'FEELS LIKE NOTHING', isBestseller: true, award: { name: "Harper's Bazaar", winner: "Best Mineral Sunscreen", logo: 'https://upload.wikimedia.org/wikipedia/commons/b/b1/Harper%27s_Bazaar_Logo.svg' }, testimonial: { text: "This product has converted me into a daily sunscreen user. I love how it feels and how dewy it makes my skin.", author: "Tessa K., Verified Buyer" }, 
