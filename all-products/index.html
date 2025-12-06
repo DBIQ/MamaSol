@@ -396,7 +396,7 @@ function productPage() {
             '5': { id: 5, name: 'The Face & Body Duo', price: 82.00, type: 'bundle', components: [1, 3], images: { main: { url: 'https://www.shopmamasol.com/cdn/shop/files/TheFaceandBodyDuo.png?v=1721757674', type: 'image' } } },
             '7': { id: 7, name: 'The Complete Set', price: 112.00, type: 'bundle', components: [1, 3, 2], images: { main: { url: 'https://www.shopmamasol.com/cdn/shop/files/MAMASOL-GROUP_100_-hiRes-cutOut.png?v=1747876852&width=1920', type: 'image' } } }
         },
-        shippingThreshold: 70, 
+        shippingThreshold: 50, 
         init() { this.$watch('selectedProductId', (newVal, oldVal) => { if(newVal !== oldVal) { this.purchaseType = 'subscribe'; this.resetMobileCarousel(); } }); const ctaSection = document.querySelector('#main-cta-section'); if(ctaSection) { const observer = new IntersectionObserver((entries) => { this.showDesktopSticky = !entries[0].isIntersecting; }, { threshold: 0 }); observer.observe(ctaSection); } },
         get selectedProduct() { return this.products[this.selectedProductId]; },
         get currentPrice() { return this.purchaseType === 'subscribe' ? this.selectedProduct.price * 0.85 : this.selectedProduct.price; },
